@@ -25,6 +25,7 @@ body{
 
 .page{
     display:none;
+    width:100%;
     height:100vh;
     justify-content:center;
     align-items:center;
@@ -55,9 +56,11 @@ h1{
     color:white;
 }
 
-.bigBtn{
-    font-size:22px;
-    padding:18px 30px;
+/* BACK BUTTON */
+.backBtn{
+    background:yellow !important;
+    color:black !important;
+    font-weight:bold;
 }
 
 /* LOGIN */
@@ -70,6 +73,7 @@ h1{
     padding:25px;
     border-radius:15px;
     display:none;
+    z-index:9999;
 }
 
 input{
@@ -78,26 +82,6 @@ input{
     margin:5px;
     border-radius:8px;
     border:none;
-}
-
-/* MENU */
-#menuPage{
-    background:white;
-    color:black;
-}
-
-/* MAP */
-.mapImg{
-    width:350px;
-    border-radius:15px;
-    box-shadow:0 0 20px red;
-    animation:float 3s infinite ease-in-out;
-}
-
-@keyframes float{
-    0%{transform:translateY(0);}
-    50%{transform:translateY(-10px);}
-    100%{transform:translateY(0);}
 }
 
 /* ERROR */
@@ -112,6 +96,18 @@ input{
     border-radius:10px;
     display:none;
     font-weight:bold;
+}
+
+/* MENU */
+#menuPage{
+    background:white;
+    color:black;
+}
+
+/* MAP */
+.mapImg{
+    width:350px;
+    border-radius:15px;
 }
 </style>
 </head>
@@ -136,121 +132,154 @@ input{
 
 <!-- PAGE 2 -->
 <div id="page2" class="page">
-    <div id="welcome" style="font-size:30px;color:#ff0033;"></div>
-    <button class="btn" onclick="openMenu()">MENÜ</button>
+    <div id="welcome" style="font-size:26px;color:#ff0033;"></div>
+    <button class="btn" onclick="show('menuPage')">MENÜ</button>
 </div>
 
 <!-- MENU -->
 <div id="menuPage" class="page">
-    <button class="btn" onclick="openMap()">Harita</button>
-    <button class="btn" onclick="openPeople()">Kişiler</button>
-    <button class="btn bigBtn" onclick="openState()">Devlet</button>
-    <button class="btn bigBtn" onclick="openEconomy()">Ekonomi</button>
-    <button class="btn" onclick="backHome()">Geri</button>
+    <button class="btn" onclick="show('mapPage')">Harita</button>
+    <button class="btn" onclick="show('peoplePage')">Kişiler</button>
+    <button class="btn" onclick="show('statePage')">Devlet</button>
+    <button class="btn" onclick="show('economyPage')">Ekonomi</button>
+    <button class="btn" onclick="show('powerPage')">Ülke Gücü</button>
+    <button class="btn" onclick="show('aiPage')">Cheha.AI</button>
+    <button class="btn backBtn" onclick="show('page2')">Geri</button>
 </div>
 
 <!-- MAP -->
 <div id="mapPage" class="page">
-    <h3>Cheha Sosyalist Federasyonu Kıbrıs Üzerinde</h3>
-
-    <img class="mapImg"
-    src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Cyprus_topographic_map-en.svg">
-
-    <button class="btn" onclick="backMenu()">Geri</button>
+    <h3>Kıbrıs Haritası</h3>
+    <img class="mapImg" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Cyprus_topographic_map-en.svg">
+    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
 
 <!-- PEOPLE -->
 <div id="peoplePage" class="page">
     <h2>Önemli İsimler</h2>
-
-    <p>Cumhurbaşkanı: Hüseyin Çelebi</p>
-    <p>Ekonomik Danışman: Erke Doruk</p>
-    <p>İnovasyon: Toygar</p>
-    <p>İdari: Eril</p>
-    <p>Askeri: Ali</p>
-
-    <button class="btn" onclick="backMenu()">Geri</button>
+    <p>Hüseyin Çelebi</p>
+    <p>Erke Doruk</p>
+    <p>Toygar</p>
+    <p>Eril</p>
+    <p>Ali</p>
+    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
 
 <!-- STATE -->
 <div id="statePage" class="page">
-    <h2>🏛 Devlet</h2>
-
-    <input id="statePass" placeholder="Şifre gir">
-
+    <h2>Devlet Girişi</h2>
+    <input id="statePass" placeholder="Şifre">
     <button class="btn" onclick="checkState()">Giriş</button>
-    <button class="btn" onclick="backMenu()">Geri</button>
+    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
 
 <!-- ECONOMY -->
 <div id="economyPage" class="page">
-    <h2>💰 Ekonomi</h2>
+    <h2>Ekonomi</h2>
+    <div id="money">Bakiye: 0£</div>
 
-    <input id="ecoPass" placeholder="Şifre gir">
+    <button class="btn" onclick="invest('gumus')">Gümüş</button>
+    <div id="gumusBar" style="height:10px;background:lime;width:0%"></div>
 
-    <button class="btn" onclick="checkEconomy()">Giriş</button>
-    <button class="btn" onclick="backMenu()">Geri</button>
+    <button class="btn" onclick="invest('altin')">Altın</button>
+    <div id="altinBar" style="height:10px;background:lime;width:0%"></div>
+
+    <button class="btn" onclick="invest('pamuk')">Pamuk</button>
+    <div id="pamukBar" style="height:10px;background:lime;width:0%"></div>
+
+    <button class="btn" onclick="invest('bronz')">Bronz</button>
+    <div id="bronzBar" style="height:10px;background:lime;width:0%"></div>
+
+    <button class="btn" onclick="invest('beton')">Beton</button>
+    <div id="betonBar" style="height:10px;background:lime;width:0%"></div>
+
+    <button class="btn" onclick="invest('sanayi')">Sanayi</button>
+    <div id="sanayiBar" style="height:10px;background:lime;width:0%"></div>
+
+    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
+</div>
+
+<!-- POWER -->
+<div id="powerPage" class="page">
+    <h2>🏛 ÜLKE GÜCÜ</h2>
+    <div>Manpower: <b>13,4M</b></div>
+    <div>Sıralama: <b>162. Medeniyet</b></div>
+    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
+</div>
+
+<!-- AI -->
+<div id="aiPage" class="page">
+    <h2>🤖 Cheha.AI</h2>
+
+    <input id="aiInput" placeholder="Sorunu yaz...">
+    <button class="btn" onclick="aiAnswer()">Gönder</button>
+
+    <div id="aiResult" style="margin-top:20px;"></div>
+
+    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
 
 <script>
 
+let balance=0;
+
+let data={
+    gumus:0, altin:0, pamuk:0,
+    bronz:0, beton:0, sanayi:0
+};
+
+/* LOGIN */
 function openLogin(){
     document.getElementById("popup").style.display="block";
 }
 
-/* LOGIN + PROFİL */
 function login(){
 
-    let isim=document.getElementById("isim").value;
-    let id=document.getElementById("id").value;
+    let isim=document.getElementById("isim").value.trim();
+    let id=document.getElementById("id").value.trim();
 
-    let user=null;
-    let soyad="";
-    let butce="";
-    let welcome="Merhaba ";
+    let user=null, soyad="", butce="", welcome="Merhaba ";
 
     if(isim==="Ali" && id==="07312012"){
-        user="Ali";
-        soyad="Sakarya";
-        butce="620£";
+        user="Ali"; soyad="Sakarya"; butce="620£";
     }
     else if(isim==="Eril" && id==="6512012"){
-        user="Eril";
-        soyad="Şehitcan";
-        butce="210£";
+        user="Eril"; soyad="Şehitcan"; butce="210£";
     }
     else if(isim==="Hüseyin" && id==="08732012"){
-        user="Hüseyin";
-        soyad="Çelebi";
-        butce="2000£";
+        user="Hüseyin"; soyad="Çelebi"; butce="2000£";
         welcome="Merhaba Başkanım ";
+    }
+    else if(isim==="Erke" && id==="09772012"){
+        user="Erke"; soyad="Doruk"; butce="0£";
     }
 
     if(user){
         document.getElementById("popup").style.display="none";
         document.getElementById("page1").style.display="none";
-        document.getElementById("page2").style.display="flex";
+        show("page2");
 
-        document.getElementById("welcome").innerHTML=
+        document.getElementById("welcome").innerHTML =
         welcome + user +
-        "<br><small>Soyad: "+soyad+"</small>"+
-        "<br><small>Bütçe: "+butce+"</small>";
+        "<br>Soyad: " + soyad +
+        "<br>Bütçe: " + butce;
+    }
+    else{
+        showError("❌ Tekrar Deneyin");
     }
 }
 
 /* NAV */
-function openMenu(){show("menuPage");}
-function openMap(){show("mapPage");}
-function openPeople(){show("peoplePage");}
-function openState(){show("statePage");}
-function openEconomy(){show("economyPage");}
-
-function backMenu(){show("menuPage");}
-function backHome(){show("page2");}
-
 function show(id){
     document.querySelectorAll(".page").forEach(p=>p.style.display="none");
     document.getElementById(id).style.display="flex";
+}
+
+/* STATE */
+function checkState(){
+    let p=document.getElementById("statePass").value;
+    if(p==="474747474") alert("✔ OK");
+    else showError("❌ Hatalı");
 }
 
 /* ERROR */
@@ -258,30 +287,34 @@ function showError(msg){
     let box=document.getElementById("errorBox");
     box.innerText=msg;
     box.style.display="block";
-
     setTimeout(()=>box.style.display="none",3000);
 }
 
-/* STATE */
-function checkState(){
-    let p=document.getElementById("statePass").value;
+/* ECONOMY */
+function invest(type){
 
-    if(p==="474747474"){
-        alert("✔ Devlet giriş başarılı");
-    }else{
-        showError("❌ Tekrar Deneyin");
-    }
+    let rand=Math.random();
+    let change=(rand<0.7)?100:-100;
+
+    balance+=change;
+
+    data[type]++;
+    if(data[type]>100) data[type]=100;
+
+    document.getElementById("money").innerText="Bakiye: "+balance+"£";
+    document.getElementById(type+"Bar").style.width=data[type]+"%";
 }
 
-/* ECONOMY */
-function checkEconomy(){
-    let p=document.getElementById("ecoPass").value;
-
-    if(p==="474747474"){
-        alert("✔ Ekonomi giriş başarılı");
-    }else{
-        showError("❌ Tekrar Deneyin");
+/* AI */
+function aiAnswer(){
+    let q=document.getElementById("aiInput").value;
+    if(!q){
+        showError("❌ Soru yaz");
+        return;
     }
+
+    document.getElementById("aiResult").innerText =
+    "🤖 Düşünülüyor... En yakın cevap: 5 saat sonra";
 }
 
 </script>
