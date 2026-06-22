@@ -99,6 +99,20 @@ input{
     background:white;
     color:black;
 }
+
+/* TABLO BAR */
+.bar{
+    height:10px;
+    background:#333;
+    border-radius:10px;
+    width:100%;
+    overflow:hidden;
+}
+.bar div{
+    height:10px;
+    width:0%;
+    transition:0.4s;
+}
 </style>
 </head>
 
@@ -154,18 +168,66 @@ input{
     <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
 
-<!-- ECONOMY -->
+<!-- ECONOMY (FIXED TABLE) -->
 <div id="economyPage" class="page">
-    <h2>Ekonomi</h2>
 
-    <div id="money">Bakiye: 0£</div>
+    <h2>💰 EKONOMİ</h2>
 
-    <button class="btn" onclick="invest('gumus')">Gümüş</button>
-    <button class="btn" onclick="invest('altin')">Altın</button>
-    <button class="btn" onclick="invest('pamuk')">Pamuk</button>
-    <button class="btn" onclick="invest('bronz')">Bronz</button>
-    <button class="btn" onclick="invest('beton')">Beton</button>
-    <button class="btn" onclick="invest('sanayi')">Sanayi</button>
+    <div id="money" style="margin-bottom:15px;font-size:20px;">
+        Bakiye: 0£
+    </div>
+
+    <table style="width:90%;max-width:650px;text-align:center;">
+        <tr>
+            <th>Yatırım</th>
+            <th>Seviye</th>
+            <th>Bar</th>
+            <th>İşlem</th>
+        </tr>
+
+        <tr>
+            <td>Gümüş</td>
+            <td id="gumusLevel">0</td>
+            <td><div class="bar"><div id="gumusBar" style="background:lime;"></div></div></td>
+            <td><button class="btn" onclick="invest('gumus')">Yatır</button></td>
+        </tr>
+
+        <tr>
+            <td>Altın</td>
+            <td id="altinLevel">0</td>
+            <td><div class="bar"><div id="altinBar" style="background:gold;"></div></div></td>
+            <td><button class="btn" onclick="invest('altin')">Yatır</button></td>
+        </tr>
+
+        <tr>
+            <td>Pamuk</td>
+            <td id="pamukLevel">0</td>
+            <td><div class="bar"><div id="pamukBar" style="background:orange;"></div></div></td>
+            <td><button class="btn" onclick="invest('pamuk')">Yatır</button></td>
+        </tr>
+
+        <tr>
+            <td>Bronz</td>
+            <td id="bronzLevel">0</td>
+            <td><div class="bar"><div id="bronzBar" style="background:#cd7f32;"></div></div></td>
+            <td><button class="btn" onclick="invest('bronz')">Yatır</button></td>
+        </tr>
+
+        <tr>
+            <td>Beton</td>
+            <td id="betonLevel">0</td>
+            <td><div class="bar"><div id="betonBar" style="background:gray;"></div></div></td>
+            <td><button class="btn" onclick="invest('beton')">Yatır</button></td>
+        </tr>
+
+        <tr>
+            <td>Sanayi</td>
+            <td id="sanayiLevel">0</td>
+            <td><div class="bar"><div id="sanayiBar" style="background:blue;"></div></div></td>
+            <td><button class="btn" onclick="invest('sanayi')">Yatır</button></td>
+        </tr>
+
+    </table>
 
     <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
@@ -192,6 +254,7 @@ input{
 
 <script>
 
+/* LOGIN */
 function openLogin(){
     document.getElementById("popup").style.display="block";
 }
@@ -231,17 +294,20 @@ function login(){
     }
 }
 
+/* NAV */
 function show(id){
     document.querySelectorAll(".page").forEach(p=>p.style.display="none");
     document.getElementById(id).style.display="flex";
 }
 
+/* STATE */
 function checkState(){
     let p=document.getElementById("statePass").value;
     if(p==="474747474") alert("✔ OK");
     else showError("❌ Hatalı");
 }
 
+/* ERROR */
 function showError(msg){
     let box=document.getElementById("errorBox");
     box.innerText=msg;
@@ -249,27 +315,28 @@ function showError(msg){
     setTimeout(()=>box.style.display="none",3000);
 }
 
-/* AI + COMMAND */
+/* AI */
 function aiAnswer(){
-    let q=document.getElementById("aiInput").value.trim();
-
+    let q=document.getElementById("aiInput").value;
     if(!q){
         showError("❌ Soru yaz");
         return;
     }
-
-    if(q === "/devlet"){
-        document.getElementById("aiResult").innerText =
-        "🔐 Devlet Şifresi: 474747474";
-        return;
-    }
-
     document.getElementById("aiResult").innerText =
     "🤖 Düşünülüyor... En yakın cevap: 5 saat sonra";
 }
 
+/* ECONOMY FIXED */
 let balance = 0;
-let data = {gumus:0, altin:0, pamuk:0, bronz:0, beton:0, sanayi:0};
+
+let data = {
+    gumus:0,
+    altin:0,
+    pamuk:0,
+    bronz:0,
+    beton:0,
+    sanayi:0
+};
 
 function invest(type){
 
@@ -287,6 +354,12 @@ function invest(type){
 
     document.getElementById("money").innerText =
         "Bakiye: " + balance + "£";
+
+    document.getElementById(type+"Bar").style.width =
+        data[type] + "%";
+
+    document.getElementById(type+"Level").innerText =
+        data[type];
 }
 
 </script>
