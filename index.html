@@ -23,32 +23,44 @@ body{
     100%{background-position:0% 50%;}
 }
 
-.container{
+.page{
+    display:none;
     height:100vh;
-    display:flex;
     justify-content:center;
     align-items:center;
     flex-direction:column;
     text-align:center;
 }
 
+.container{
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+}
+
 h1{
-    font-size:45px;
     color:#ff0033;
     text-shadow:0 0 20px red;
 }
 
 .btn{
-    padding:12px 25px;
+    padding:12px 20px;
+    margin:10px;
     border:none;
     border-radius:10px;
     cursor:pointer;
     background:linear-gradient(90deg,#ff0033,#660000);
     color:white;
-    margin-top:15px;
 }
 
-/* POPUP */
+.bigBtn{
+    font-size:22px;
+    padding:18px 30px;
+}
+
+/* LOGIN */
 .popup{
     position:fixed;
     top:50%;
@@ -58,34 +70,37 @@ h1{
     padding:25px;
     border-radius:15px;
     display:none;
-    width:300px;
-    border:1px solid red;
 }
 
 input{
-    width:90%;
-    padding:10px;
-    margin:10px 0;
-    border:none;
+    width:200px;
+    padding:8px;
+    margin:5px;
     border-radius:8px;
+    border:none;
 }
 
-/* PAGES */
-#page2, #menuPage{
-    display:none;
-    height:100vh;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-}
-
-/* MENU ONLY STYLE */
+/* MENU */
 #menuPage{
     background:white;
     color:black;
 }
 
-/* ERROR BOX */
+/* MAP */
+.mapImg{
+    width:350px;
+    border-radius:15px;
+    box-shadow:0 0 20px red;
+    animation:float 3s infinite ease-in-out;
+}
+
+@keyframes float{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-10px);}
+    100%{transform:translateY(0);}
+}
+
+/* ERROR */
 #errorBox{
     position:fixed;
     top:20px;
@@ -96,6 +111,7 @@ input{
     padding:10px 20px;
     border-radius:10px;
     display:none;
+    font-weight:bold;
 }
 </style>
 </head>
@@ -107,85 +123,165 @@ input{
 <!-- PAGE 1 -->
 <div id="page1" class="container">
     <h1>☭ CHEHA SOSYALİST DEVLETİ</h1>
-    <button class="btn" onclick="openForm()">GİRİŞ</button>
+    <button class="btn" onclick="openLogin()">GİRİŞ</button>
 </div>
 
 <!-- LOGIN -->
 <div class="popup" id="popup">
-    <h3>Giriş Yap</h3>
-
-    <input type="text" id="isim" placeholder="İsim">
-    <input type="text" id="id" placeholder="ID">
-
+    <h3>Giriş</h3>
+    <input id="isim" placeholder="İsim">
+    <input id="id" placeholder="ID">
     <button class="btn" onclick="login()">Giriş</button>
 </div>
 
 <!-- PAGE 2 -->
-<div id="page2" class="container">
-    <div id="welcome" style="font-size:40px;color:#ff0033;"></div>
+<div id="page2" class="page">
+    <div id="welcome" style="font-size:30px;color:#ff0033;"></div>
     <button class="btn" onclick="openMenu()">MENÜ</button>
 </div>
 
-<!-- MENU PAGE -->
-<div id="menuPage" class="container">
-    <div style="font-size:30px;">
-        Yakında hazır olacak
-    </div>
-    <button class="btn" onclick="backHome()">Geri Dön</button>
+<!-- MENU -->
+<div id="menuPage" class="page">
+    <button class="btn" onclick="openMap()">Harita</button>
+    <button class="btn" onclick="openPeople()">Kişiler</button>
+    <button class="btn bigBtn" onclick="openState()">Devlet</button>
+    <button class="btn bigBtn" onclick="openEconomy()">Ekonomi</button>
+    <button class="btn" onclick="backHome()">Geri</button>
+</div>
+
+<!-- MAP -->
+<div id="mapPage" class="page">
+    <h3>Cheha Sosyalist Federasyonu Kıbrıs Üzerinde</h3>
+
+    <img class="mapImg"
+    src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Cyprus_topographic_map-en.svg">
+
+    <button class="btn" onclick="backMenu()">Geri</button>
+</div>
+
+<!-- PEOPLE -->
+<div id="peoplePage" class="page">
+    <h2>Önemli İsimler</h2>
+
+    <p>Cumhurbaşkanı: Hüseyin Çelebi</p>
+    <p>Ekonomik Danışman: Erke Doruk</p>
+    <p>İnovasyon: Toygar</p>
+    <p>İdari: Eril</p>
+    <p>Askeri: Ali</p>
+
+    <button class="btn" onclick="backMenu()">Geri</button>
+</div>
+
+<!-- STATE -->
+<div id="statePage" class="page">
+    <h2>🏛 Devlet</h2>
+
+    <input id="statePass" placeholder="Şifre gir">
+
+    <button class="btn" onclick="checkState()">Giriş</button>
+    <button class="btn" onclick="backMenu()">Geri</button>
+</div>
+
+<!-- ECONOMY -->
+<div id="economyPage" class="page">
+    <h2>💰 Ekonomi</h2>
+
+    <input id="ecoPass" placeholder="Şifre gir">
+
+    <button class="btn" onclick="checkEconomy()">Giriş</button>
+    <button class="btn" onclick="backMenu()">Geri</button>
 </div>
 
 <script>
 
-function openForm(){
+function openLogin(){
     document.getElementById("popup").style.display="block";
 }
 
-/* ERROR MESSAGE */
-function showError(){
-    let box=document.getElementById("errorBox");
-    box.innerText="❌ Tekrar Deneyin (isim + ID)";
-    box.style.display="block";
-
-    setTimeout(()=>{
-        box.style.display="none";
-    },3000);
-}
-
-/* LOGIN */
+/* LOGIN + PROFİL */
 function login(){
 
     let isim=document.getElementById("isim").value;
     let id=document.getElementById("id").value;
 
     let user=null;
+    let soyad="";
+    let butce="";
+    let welcome="Merhaba ";
 
-    if(isim==="Ali" && id==="07312012") user="Ali";
-    else if(isim==="Hüseyin" && id==="08732012") user="Hüseyin";
-    else if(isim==="Eril" && id==="6512012") user="Eril";
+    if(isim==="Ali" && id==="07312012"){
+        user="Ali";
+        soyad="Sakarya";
+        butce="620£";
+    }
+    else if(isim==="Eril" && id==="6512012"){
+        user="Eril";
+        soyad="Şehitcan";
+        butce="210£";
+    }
+    else if(isim==="Hüseyin" && id==="08732012"){
+        user="Hüseyin";
+        soyad="Çelebi";
+        butce="2000£";
+        welcome="Merhaba Başkanım ";
+    }
 
     if(user){
-
         document.getElementById("popup").style.display="none";
         document.getElementById("page1").style.display="none";
         document.getElementById("page2").style.display="flex";
 
-        document.getElementById("welcome").innerText =
-        "Merhaba " + user + " ☭";
-    }
-    else{
-        showError();
+        document.getElementById("welcome").innerHTML=
+        welcome + user +
+        "<br><small>Soyad: "+soyad+"</small>"+
+        "<br><small>Bütçe: "+butce+"</small>";
     }
 }
 
-/* MENU */
-function openMenu(){
-    document.getElementById("page2").style.display="none";
-    document.getElementById("menuPage").style.display="flex";
+/* NAV */
+function openMenu(){show("menuPage");}
+function openMap(){show("mapPage");}
+function openPeople(){show("peoplePage");}
+function openState(){show("statePage");}
+function openEconomy(){show("economyPage");}
+
+function backMenu(){show("menuPage");}
+function backHome(){show("page2");}
+
+function show(id){
+    document.querySelectorAll(".page").forEach(p=>p.style.display="none");
+    document.getElementById(id).style.display="flex";
 }
 
-function backHome(){
-    document.getElementById("menuPage").style.display="none";
-    document.getElementById("page2").style.display="flex";
+/* ERROR */
+function showError(msg){
+    let box=document.getElementById("errorBox");
+    box.innerText=msg;
+    box.style.display="block";
+
+    setTimeout(()=>box.style.display="none",3000);
+}
+
+/* STATE */
+function checkState(){
+    let p=document.getElementById("statePass").value;
+
+    if(p==="474747474"){
+        alert("✔ Devlet giriş başarılı");
+    }else{
+        showError("❌ Tekrar Deneyin");
+    }
+}
+
+/* ECONOMY */
+function checkEconomy(){
+    let p=document.getElementById("ecoPass").value;
+
+    if(p==="474747474"){
+        alert("✔ Ekonomi giriş başarılı");
+    }else{
+        showError("❌ Tekrar Deneyin");
+    }
 }
 
 </script>
