@@ -56,14 +56,12 @@ h1{
     color:white;
 }
 
-/* BACK BUTTON */
 .backBtn{
     background:yellow !important;
     color:black !important;
     font-weight:bold;
 }
 
-/* LOGIN */
 .popup{
     position:fixed;
     top:50%;
@@ -84,7 +82,6 @@ input{
     border:none;
 }
 
-/* ERROR */
 #errorBox{
     position:fixed;
     top:20px;
@@ -98,16 +95,9 @@ input{
     font-weight:bold;
 }
 
-/* MENU */
 #menuPage{
     background:white;
     color:black;
-}
-
-/* MAP */
-.mapImg{
-    width:350px;
-    border-radius:15px;
 }
 </style>
 </head>
@@ -116,13 +106,12 @@ input{
 
 <div id="errorBox"></div>
 
-<!-- PAGE 1 -->
+<!-- LOGIN -->
 <div id="page1" class="container">
     <h1>☭ CHEHA SOSYALİST DEVLETİ</h1>
     <button class="btn" onclick="openLogin()">GİRİŞ</button>
 </div>
 
-<!-- LOGIN -->
 <div class="popup" id="popup">
     <h3>Giriş</h3>
     <input id="isim" placeholder="İsim">
@@ -138,20 +127,12 @@ input{
 
 <!-- MENU -->
 <div id="menuPage" class="page">
-    <button class="btn" onclick="show('mapPage')">Harita</button>
     <button class="btn" onclick="show('peoplePage')">Kişiler</button>
     <button class="btn" onclick="show('statePage')">Devlet</button>
     <button class="btn" onclick="show('economyPage')">Ekonomi</button>
     <button class="btn" onclick="show('powerPage')">Ülke Gücü</button>
     <button class="btn" onclick="show('aiPage')">Cheha.AI</button>
     <button class="btn backBtn" onclick="show('page2')">Geri</button>
-</div>
-
-<!-- MAP -->
-<div id="mapPage" class="page">
-    <h3>Kıbrıs Haritası</h3>
-    <img class="mapImg" src="https://upload.wikimedia.org/wikipedia/commons/1/1b/Cyprus_topographic_map-en.svg">
-    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
 
 <!-- PEOPLE -->
@@ -176,25 +157,15 @@ input{
 <!-- ECONOMY -->
 <div id="economyPage" class="page">
     <h2>Ekonomi</h2>
+
     <div id="money">Bakiye: 0£</div>
 
     <button class="btn" onclick="invest('gumus')">Gümüş</button>
-    <div id="gumusBar" style="height:10px;background:lime;width:0%"></div>
-
     <button class="btn" onclick="invest('altin')">Altın</button>
-    <div id="altinBar" style="height:10px;background:lime;width:0%"></div>
-
     <button class="btn" onclick="invest('pamuk')">Pamuk</button>
-    <div id="pamukBar" style="height:10px;background:lime;width:0%"></div>
-
     <button class="btn" onclick="invest('bronz')">Bronz</button>
-    <div id="bronzBar" style="height:10px;background:lime;width:0%"></div>
-
     <button class="btn" onclick="invest('beton')">Beton</button>
-    <div id="betonBar" style="height:10px;background:lime;width:0%"></div>
-
     <button class="btn" onclick="invest('sanayi')">Sanayi</button>
-    <div id="sanayiBar" style="height:10px;background:lime;width:0%"></div>
 
     <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
@@ -221,20 +192,11 @@ input{
 
 <script>
 
-let balance=0;
-
-let data={
-    gumus:0, altin:0, pamuk:0,
-    bronz:0, beton:0, sanayi:0
-};
-
-/* LOGIN */
 function openLogin(){
     document.getElementById("popup").style.display="block";
 }
 
 function login(){
-
     let isim=document.getElementById("isim").value.trim();
     let id=document.getElementById("id").value.trim();
 
@@ -269,20 +231,17 @@ function login(){
     }
 }
 
-/* NAV */
 function show(id){
     document.querySelectorAll(".page").forEach(p=>p.style.display="none");
     document.getElementById(id).style.display="flex";
 }
 
-/* STATE */
 function checkState(){
     let p=document.getElementById("statePass").value;
     if(p==="474747474") alert("✔ OK");
     else showError("❌ Hatalı");
 }
 
-/* ERROR */
 function showError(msg){
     let box=document.getElementById("errorBox");
     box.innerText=msg;
@@ -290,31 +249,44 @@ function showError(msg){
     setTimeout(()=>box.style.display="none",3000);
 }
 
-/* ECONOMY */
-function invest(type){
-
-    let rand=Math.random();
-    let change=(rand<0.7)?100:-100;
-
-    balance+=change;
-
-    data[type]++;
-    if(data[type]>100) data[type]=100;
-
-    document.getElementById("money").innerText="Bakiye: "+balance+"£";
-    document.getElementById(type+"Bar").style.width=data[type]+"%";
-}
-
-/* AI */
+/* AI + COMMAND */
 function aiAnswer(){
-    let q=document.getElementById("aiInput").value;
+    let q=document.getElementById("aiInput").value.trim();
+
     if(!q){
         showError("❌ Soru yaz");
         return;
     }
 
+    if(q === "/devlet"){
+        document.getElementById("aiResult").innerText =
+        "🔐 Devlet Şifresi: 474747474";
+        return;
+    }
+
     document.getElementById("aiResult").innerText =
     "🤖 Düşünülüyor... En yakın cevap: 5 saat sonra";
+}
+
+let balance = 0;
+let data = {gumus:0, altin:0, pamuk:0, bronz:0, beton:0, sanayi:0};
+
+function invest(type){
+
+    let roll = Math.random();
+    let positive = roll < 0.58;
+
+    let values = [100,250,400];
+    let amount = values[Math.floor(Math.random()*values.length)];
+
+    if(!positive) amount = -amount;
+
+    balance += amount;
+
+    data[type] = Math.min((data[type] || 0) + 1, 100);
+
+    document.getElementById("money").innerText =
+        "Bakiye: " + balance + "£";
 }
 
 </script>
