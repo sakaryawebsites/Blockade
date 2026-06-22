@@ -100,7 +100,7 @@ input{
     color:black;
 }
 
-/* TABLO BAR */
+/* BAR */
 .bar{
     height:10px;
     background:#333;
@@ -146,6 +146,12 @@ input{
     <button class="btn" onclick="show('economyPage')">Ekonomi</button>
     <button class="btn" onclick="show('powerPage')">Ülke Gücü</button>
     <button class="btn" onclick="show('aiPage')">Cheha.AI</button>
+
+    <button class="btn" style="background:linear-gradient(90deg,#0044ff,#000033);box-shadow:0 0 18px #0044ff;"
+    onclick="openProtocol()">
+    🔵 Protokol 13
+    </button>
+
     <button class="btn backBtn" onclick="show('page2')">Geri</button>
 </div>
 
@@ -168,7 +174,7 @@ input{
     <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
 
-<!-- ECONOMY (FIXED TABLE) -->
+<!-- ECONOMY -->
 <div id="economyPage" class="page">
 
     <h2>💰 EKONOMİ</h2>
@@ -226,7 +232,6 @@ input{
             <td><div class="bar"><div id="sanayiBar" style="background:blue;"></div></div></td>
             <td><button class="btn" onclick="invest('sanayi')">Yatır</button></td>
         </tr>
-
     </table>
 
     <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
@@ -248,6 +253,22 @@ input{
     <button class="btn" onclick="aiAnswer()">Gönder</button>
 
     <div id="aiResult" style="margin-top:20px;"></div>
+
+    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
+</div>
+
+<!-- PROTOCOL -->
+<div id="protocolPage" class="page">
+
+    <h2 style="color:#00aaff;">🔵 PROTOKOL 13</h2>
+
+    <input id="protocolPass" placeholder="Şifre">
+    <button class="btn" onclick="checkProtocol()">Giriş</button>
+
+    <div id="protocolContent" style="display:none;margin-top:20px;">
+        ✔ ERİŞİM SAĞLANDI<br>
+        📡 Gizli sistem aktif
+    </div>
 
     <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
 </div>
@@ -323,10 +344,10 @@ function aiAnswer(){
         return;
     }
     document.getElementById("aiResult").innerText =
-    "🤖 Düşünülüyor... En yakın cevap: 5 saat sonra";
+    "🤖 Düşünülüyor... 5 saat sonra";
 }
 
-/* ECONOMY FIXED */
+/* ECONOMY */
 let balance = 0;
 
 let data = {
@@ -350,7 +371,7 @@ function invest(type){
 
     balance += amount;
 
-    data[type] = Math.min((data[type] || 0) + 1, 100);
+    data[type] = Math.min(data[type] + 1, 100);
 
     document.getElementById("money").innerText =
         "Bakiye: " + balance + "£";
@@ -360,6 +381,22 @@ function invest(type){
 
     document.getElementById(type+"Level").innerText =
         data[type];
+}
+
+/* PROTOCOL 13 */
+function openProtocol(){
+    show('protocolPage');
+}
+
+function checkProtocol(){
+    let pass=document.getElementById("protocolPass").value;
+
+    if(pass==="12929287728"){
+        document.getElementById("protocolContent").style.display="block";
+    }
+    else{
+        showError("❌ Yetkisiz erişim");
+    }
 }
 
 </script>
