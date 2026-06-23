@@ -61,6 +61,13 @@ input{
     box-shadow:0 0 25px red;
 }
 
+/* O-LOG BUTONU */
+#ologBtn{
+    background:linear-gradient(90deg,yellow,gold);
+    color:black;
+    font-weight:bold;
+}
+
 /* TOAST */
 #toast{
     position:fixed;
@@ -94,6 +101,21 @@ input{
     display:none;
     font-weight:bold;
 }
+
+/* OLOG PANEL */
+#ologPage{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100vh;
+    background:rgba(0,0,0,0.95);
+    display:none;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
 </style>
 </head>
 
@@ -113,6 +135,16 @@ input{
 
     <button class="btn" onclick="login()">GİRİŞ</button>
 
+    <button class="btn" id="ologBtn" onclick="openOlog()">O-Log</button>
+
+</div>
+
+<div id="ologPage">
+    <h2 style="color:yellow;">O-LOG GİRİŞ</h2>
+
+    <input id="ologPass" placeholder="Şifre">
+    <button class="btn" onclick="checkOlog()">Giriş Yap</button>
+    <button class="btn" onclick="closeOlog()">Kapat</button>
 </div>
 
 <script>
@@ -136,11 +168,10 @@ function login(){
     else if(i==="Toygar" && id==="402012") user="Toygar";
 
     if(user){
-
         showToast("☭ Merhaba " + user);
 
         setTimeout(()=>{
-            window.location.href = "menu.html";
+            window.location.href="menu.html";
         },1200);
 
     } else {
@@ -148,30 +179,38 @@ function login(){
     }
 }
 
-/* YEŞİL BİLDİRİM */
 function showToast(msg){
-
-    let t = document.getElementById("toast");
-
-    t.innerText = msg;
+    let t=document.getElementById("toast");
+    t.innerText=msg;
     t.classList.add("show");
-
-    setTimeout(()=>{
-        t.classList.remove("show");
-    },4000);
+    setTimeout(()=>t.classList.remove("show"),4000);
 }
 
-/* HATA */
 function showError(msg){
+    let box=document.getElementById("errorBox");
+    box.innerText=msg;
+    box.style.display="block";
+    setTimeout(()=>box.style.display="none",2000);
+}
 
-    let box = document.getElementById("errorBox");
+/* OLOG */
+function openOlog(){
+    document.getElementById("ologPage").style.display="flex";
+}
 
-    box.innerText = msg;
-    box.style.display = "block";
+function closeOlog(){
+    document.getElementById("ologPage").style.display="none";
+}
 
-    setTimeout(()=>{
-        box.style.display = "none";
-    },2000);
+function checkOlog(){
+    let pass = document.getElementById("ologPass").value;
+
+    if(pass === "7777777"){
+        showToast("✔ O-Log Açıldı");
+        closeOlog();
+    } else {
+        showError("Hatalı Kod");
+    }
 }
 
 </script>
