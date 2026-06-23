@@ -1,17 +1,75 @@
 <!DOCTYPE html>
-<html>
-<body style="font-family:Arial;text-align:center;">
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Kişiler</title>
 
-<h2>Kişiler</h2>
+<style>
+body{
+    margin:0;
+    font-family:Arial;
+    background:radial-gradient(circle,#1a0000,#000);
+    color:white;
+}
 
+.container{
+    text-align:center;
+    padding:40px;
+}
+
+h1{
+    color:#ff0033;
+    text-shadow:0 0 20px red;
+}
+
+.box{
+    margin:auto;
+    width:300px;
+    padding:20px;
+    border:1px solid red;
+    border-radius:15px;
+    box-shadow:0 0 20px rgba(255,0,0,0.3);
+}
+
+p{
+    padding:5px;
+}
+
+.btn{
+    margin-top:20px;
+    padding:10px 20px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,#ff0033,#660000);
+    color:white;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 15px red;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>👥 KİŞİLER</h1>
+
+<div class="box">
 <p>Hüseyin Çelebi</p>
 <p>Erke Doruk</p>
 <p>Toygar</p>
 <p>Eril Şehitcan</p>
 <p>Ali</p>
+</div>
 
-<br>
-<button onclick="location.href='menu.html'">Geri</button>
+<button class="btn" onclick="location.href='menu.html'">GERİ</button>
+
+</div>
 
 </body>
 </html>
