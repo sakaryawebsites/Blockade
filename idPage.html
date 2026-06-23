@@ -1,0 +1,58 @@
+<!-- ID DEĞİŞTİRME SAYFASI -->
+<div id="idPage" class="page">
+
+<style>
+.idBox{
+    width:90%;
+    max-width:500px;
+    background:rgba(0,0,0,0.8);
+    border:1px solid red;
+    box-shadow:0 0 20px red;
+    padding:20px;
+    border-radius:15px;
+}
+
+.idTitle{
+    color:#ff0033;
+    text-shadow:0 0 15px red;
+    margin-bottom:15px;
+}
+
+.idInput{
+    width:100%;
+    padding:10px;
+    margin:6px 0;
+    border-radius:10px;
+    border:none;
+    outline:none;
+}
+
+.idBtn{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    background:linear-gradient(90deg,#ff0033,#660000);
+    color:white;
+    font-weight:bold;
+}
+</style>
+
+<div class="idBox">
+    <div class="idTitle">🪪 ID DEĞİŞTİRME</div>
+
+    <input class="idInput" id="oldName" placeholder="İsminiz">
+    <input class="idInput" id="oldID" placeholder="Şuan ki ID'niz">
+    <input class="idInput" id="newID" placeholder="Yeni ID">
+    <input class="idInput" id="newID2" placeholder="Yeni ID Doğrulayın">
+
+    <button class="idBtn" onclick="generateDocument()">Onayla</button>
+
+    <button class="idBtn" style="background:yellow;color:black;" onclick="show('menuPage')">
+        Geri
+    </button>
+</div>
+
+</div>
