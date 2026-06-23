@@ -1,28 +1,109 @@
 <!DOCTYPE html>
 <html>
-<body style="font-family:Arial;text-align:center;">
+<head>
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+    background:linear-gradient(-45deg,#000,#1a0000,#000);
+    color:white;
+}
 
-<h2>Cheha.AI</h2>
+/* BAŞLIK */
+h2{
+    color:#ff0033;
+    text-shadow:0 0 15px red;
+}
+
+/* BUTON */
+button{
+    padding:10px 18px;
+    border:none;
+    border-radius:10px;
+    background:linear-gradient(90deg,#ff0033,#660000);
+    color:white;
+    cursor:pointer;
+    margin:5px;
+    box-shadow:0 0 10px rgba(255,0,0,0.6);
+}
+
+button:hover{
+    transform:scale(1.05);
+}
+
+/* KUTU */
+#box{
+    margin-top:20px;
+    padding:15px;
+    display:inline-block;
+    border:1px solid red;
+    border-radius:10px;
+    box-shadow:0 0 20px rgba(255,0,0,0.4);
+    min-width:250px;
+}
+
+/* INPUT */
+input{
+    padding:10px;
+    width:220px;
+    border-radius:10px;
+    border:1px solid red;
+    outline:none;
+    margin-top:10px;
+    background:black;
+    color:white;
+}
+
+input:focus{
+    box-shadow:0 0 10px red;
+}
+</style>
+</head>
+
+<body>
+
+<h2>☭ Cheha.AI</h2>
 
 <button onclick="step1()">Merhaba</button>
 
+<br>
+
+<!-- SORU ALANI -->
+<input id="question" placeholder="Sorunu yaz..." />
+
+<button onclick="ask()">Gönder</button>
+
 <div id="box"></div>
-
-<script>
-
-let state=0;
-
-function step1(){
-if(state===0){
-document.getElementById("box").innerText="Merhaba Nasıl Yardımcı olabilirim";
-state=1;
-}
-}
-
-</script>
 
 <br><br>
 <button onclick="location.href='menu.html'">Geri</button>
+
+<script>
+
+let state = 0;
+
+function step1(){
+    if(state === 0){
+        document.getElementById("box").innerText =
+        "Merhaba! Nasıl yardımcı olabilirim?";
+        state = 1;
+    }
+}
+
+function ask(){
+    let q = document.getElementById("question").value;
+
+    if(q.trim() === ""){
+        document.getElementById("box").innerText =
+        "❌ Lütfen bir soru yaz";
+        return;
+    }
+
+    document.getElementById("box").innerText =
+    "📩 Soru alındı: " + q;
+}
+
+</script>
 
 </body>
 </html>
