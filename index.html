@@ -39,6 +39,7 @@ input{
     margin:6px;
     border-radius:10px;
     border:none;
+    outline:none;
 }
 
 /* BUTON */
@@ -49,7 +50,6 @@ input{
     border-radius:12px;
     cursor:pointer;
     font-weight:bold;
-
     background:linear-gradient(90deg,#ff0033,#660000);
     color:white;
     box-shadow:0 0 15px rgba(255,0,0,0.5);
@@ -61,7 +61,7 @@ input{
     box-shadow:0 0 25px red;
 }
 
-/* TOAST BİLDİRİM */
+/* TOAST */
 #toast{
     position:fixed;
     top:-100px;
@@ -77,7 +77,6 @@ input{
     z-index:9999;
 }
 
-/* SHOW ANIMATION */
 #toast.show{
     top:20px;
 }
@@ -93,6 +92,7 @@ input{
     padding:10px 20px;
     border-radius:10px;
     display:none;
+    font-weight:bold;
 }
 </style>
 </head>
@@ -119,48 +119,59 @@ input{
 
 function login(){
 
-let i=document.getElementById("isim").value.trim();
-let id=document.getElementById("id").value.trim();
+    let i = document.getElementById("isim").value.trim();
+    let id = document.getElementById("id").value.trim();
 
-let user=null;
+    if(!i || !id){
+        showError("Lütfen tüm alanları doldur");
+        return;
+    }
 
-if((i==="Ali"&&id==="07312012")) user="Ali";
-else if((i==="Eril"&&id==="6512012")) user="Eril";
-else if((i==="Hüseyin"&&id==="08732012")) user="Hüseyin";
-else if((i==="Erke"&&id==="09772012")) user="Erke";
-else if((i==="Toygar"&&id==="402012")) user="Toygar";
+    let user = null;
 
-if(user){
+    if(i==="Ali" && id==="07312012") user="Ali";
+    else if(i==="Eril" && id==="6512012") user="Eril";
+    else if(i==="Hüseyin" && id==="08732012") user="Hüseyin";
+    else if(i==="Erke" && id==="09772012") user="Erke";
+    else if(i==="Toygar" && id==="402012") user="Toygar";
 
-showToast("Merhaba " + user);
+    if(user){
 
-setTimeout(()=>{
-window.location.href="menu.html";
-},1200);
+        showToast("☭ Merhaba " + user);
 
-}else{
-showError("Hatalı giriş");
+        setTimeout(()=>{
+            window.location.href = "menu.html";
+        },1200);
+
+    } else {
+        showError("❌ Hatalı giriş");
+    }
 }
 
-}
-
-/* 🔥 YEŞİL BİLDİRİM */
+/* YEŞİL BİLDİRİM */
 function showToast(msg){
-let t=document.getElementById("toast");
-t.innerText=msg;
-t.classList.add("show");
 
-setTimeout(()=>{
-t.classList.remove("show");
-},4000);
+    let t = document.getElementById("toast");
+
+    t.innerText = msg;
+    t.classList.add("show");
+
+    setTimeout(()=>{
+        t.classList.remove("show");
+    },4000);
 }
 
-/* ERROR */
-function showError(m){
-let box=document.getElementById("errorBox");
-box.innerText=m;
-box.style.display="block";
-setTimeout(()=>box.style.display="none",2000);
+/* HATA */
+function showError(msg){
+
+    let box = document.getElementById("errorBox");
+
+    box.innerText = msg;
+    box.style.display = "block";
+
+    setTimeout(()=>{
+        box.style.display = "none";
+    },2000);
 }
 
 </script>
