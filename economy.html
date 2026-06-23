@@ -6,54 +6,57 @@
 
 <style>
 body{
+    margin:0;
     font-family:Arial;
-    text-align:center;
-    background:#111;
+    background:radial-gradient(circle,#1a0000,#000);
     color:white;
+    text-align:center;
+}
+
+h1{
+    color:#ff0033;
+    text-shadow:0 0 20px red;
 }
 
 table{
     margin:auto;
-    width:80%;
-    max-width:700px;
 }
 
 .btn{
     padding:8px 14px;
     border:none;
-    border-radius:8px;
-    cursor:pointer;
-    background:#ff0033;
+    border-radius:10px;
+    background:linear-gradient(90deg,#ff0033,#660000);
     color:white;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.btn:hover{
+    transform:scale(1.1);
+    box-shadow:0 0 15px red;
 }
 
 .bar{
-    height:10px;
     width:120px;
+    height:10px;
     background:#333;
     border-radius:10px;
     overflow:hidden;
-    margin:auto;
 }
 
 .bar div{
     height:10px;
     width:0%;
-    background:lime;
+    background:red;
     transition:0.3s;
-}
-
-.back{
-    background:yellow;
-    color:black;
-    margin-top:20px;
 }
 </style>
 </head>
 
 <body>
 
-<h1>💰 EKONOMİ SİSTEMİ</h1>
+<h1>💰 EKONOMİ</h1>
 
 <div id="money">Bakiye: 0$</div>
 
@@ -103,25 +106,24 @@ table{
 
 </table>
 
-<button class="btn back" onclick="location.href='menu.html'">Geri</button>
+<br>
+<button class="btn" onclick="location.href='menu.html'">GERİ</button>
 
 <script>
 
-let money = 0;
-let data = [0,0,0,0,0,0];
+let money=0;
+let d=[0,0,0,0,0,0];
 
 function invest(i){
 
-    let gain = [100,200,300,400,500,600][i];
-    let percentGain = Math.floor(Math.random()*10)+5;
+money+=100;
+d[i]=Math.min(100,d[i]+10);
 
-    money += gain;
-    data[i] = Math.min(100, data[i] + percentGain);
+document.getElementById("money").innerText="Bakiye: "+money+"$";
 
-    document.getElementById("money").innerText = "Bakiye: " + money + "$";
+document.getElementById("b"+i).style.width=d[i]+"%";
+document.getElementById("g"+i).innerText=d[i]+"%";
 
-    document.getElementById("b"+i).style.width = data[i] + "%";
-    document.getElementById("g"+i).innerText = data[i] + "%";
 }
 
 </script>
