@@ -3,20 +3,123 @@
 <head>
 <meta charset="UTF-8">
 <title>Menü</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Russo+One&display=swap" rel="stylesheet">
+
+<style>
+body{
+    margin:0;
+    font-family:'Orbitron', sans-serif;
+    background:radial-gradient(circle,#1a0000,#000);
+    color:white;
+    overflow:hidden;
+}
+
+/* ÜST PANEL */
+.header{
+    text-align:center;
+    padding:20px;
+    border-bottom:1px solid rgba(255,0,0,0.3);
+}
+
+.header h1{
+    font-family:'Russo One', sans-serif;
+    color:#ff0033;
+    text-shadow:0 0 20px red;
+    margin:0;
+}
+
+.header p{
+    color:#aaa;
+    font-size:12px;
+}
+
+/* ANA PANEL */
+.panel{
+    height:calc(100vh - 100px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+/* MENÜ KUTU */
+.menuBox{
+    width:300px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    padding:20px;
+    border:1px solid rgba(255,0,0,0.3);
+    border-radius:15px;
+    background:rgba(0,0,0,0.6);
+    box-shadow:0 0 25px rgba(255,0,0,0.2);
+}
+
+/* BUTON */
+.btn{
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:14px;
+
+    background:linear-gradient(90deg,#ff0033,#660000);
+    color:white;
+
+    transition:0.2s;
+    text-align:left;
+    padding-left:15px;
+
+    box-shadow:0 0 10px rgba(255,0,0,0.3);
+}
+
+.btn:hover{
+    transform:scale(1.05);
+    box-shadow:0 0 20px red;
+}
+
+/* ALT BUTON */
+.logout{
+    background:linear-gradient(90deg,#333,#111);
+    margin-top:10px;
+}
+
+.footer{
+    text-align:center;
+    font-size:11px;
+    color:#666;
+    margin-top:10px;
+}
+</style>
 </head>
 
-<body style="background:white;color:black;text-align:center;font-family:Arial;">
+<body>
 
-<h1>MENÜ</h1>
+<div class="header">
+    <h1>☭ CHEHA DEVLET PANELİ</h1>
+    <p>Merkezi Yönetim Kontrol Sistemi</p>
+</div>
 
-<button onclick="location.href='people.html'">Kişiler</button>
-<button onclick="location.href='economy.html'">Ekonomi</button>
-<button onclick="location.href='power.html'">Ülke Gücü</button>
-<button onclick="location.href='ai.html'">Cheha.AI</button>
-<button onclick="location.href='protocol.html'">Protokol 13</button>
+<div class="panel">
 
-<br><br>
-<button onclick="location.href='index.html'">Çıkış</button>
+    <div class="menuBox">
+
+        <button class="btn" onclick="location.href='people.html'">👥 KİŞİLER</button>
+        <button class="btn" onclick="location.href='economy.html'">💰 EKONOMİ</button>
+        <button class="btn" onclick="location.href='power.html'">🏛 ÜLKE GÜCÜ</button>
+        <button class="btn" onclick="location.href='ai.html'">🤖 CHEHA.AI</button>
+        <button class="btn" onclick="location.href='protocol.html'">🔵 PROTOKOL 13</button>
+
+        <button class="btn logout" onclick="location.href='index.html'">🚪 ÇIKIŞ</button>
+
+        <div class="footer">
+            Cheha Sosyalist Devleti v1.0
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
