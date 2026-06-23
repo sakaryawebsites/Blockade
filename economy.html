@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>Ekonomi</title>
+
+<style>
+body{
+    font-family:Arial;
+    text-align:center;
+    background:#111;
+    color:white;
+}
+
+table{
+    margin:auto;
+    width:80%;
+    max-width:700px;
+}
+
+.btn{
+    padding:8px 14px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#ff0033;
+    color:white;
+}
+
+.bar{
+    height:10px;
+    width:120px;
+    background:#333;
+    border-radius:10px;
+    overflow:hidden;
+    margin:auto;
+}
+
+.bar div{
+    height:10px;
+    width:0%;
+    background:lime;
+    transition:0.3s;
+}
+
+.back{
+    background:yellow;
+    color:black;
+    margin-top:20px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>💰 EKONOMİ SİSTEMİ</h1>
+
+<div id="money">Bakiye: 0$</div>
+
+<table>
+
+<tr>
+<td>Gümüş</td>
+<td id="g0">0%</td>
+<td><div class="bar"><div id="b0"></div></div></td>
+<td><button class="btn" onclick="invest(0)">Yatır</button></td>
+</tr>
+
+<tr>
+<td>Altın</td>
+<td id="g1">0%</td>
+<td><div class="bar"><div id="b1"></div></div></td>
+<td><button class="btn" onclick="invest(1)">Yatır</button></td>
+</tr>
+
+<tr>
+<td>Pamuk</td>
+<td id="g2">0%</td>
+<td><div class="bar"><div id="b2"></div></div></td>
+<td><button class="btn" onclick="invest(2)">Yatır</button></td>
+</tr>
+
+<tr>
+<td>Bronz</td>
+<td id="g3">0%</td>
+<td><div class="bar"><div id="b3"></div></div></td>
+<td><button class="btn" onclick="invest(3)">Yatır</button></td>
+</tr>
+
+<tr>
+<td>Beton</td>
+<td id="g4">0%</td>
+<td><div class="bar"><div id="b4"></div></div></td>
+<td><button class="btn" onclick="invest(4)">Yatır</button></td>
+</tr>
+
+<tr>
+<td>Sanayi</td>
+<td id="g5">0%</td>
+<td><div class="bar"><div id="b5"></div></div></td>
+<td><button class="btn" onclick="invest(5)">Yatır</button></td>
+</tr>
+
+</table>
+
+<button class="btn back" onclick="location.href='menu.html'">Geri</button>
+
+<script>
+
+let money = 0;
+let data = [0,0,0,0,0,0];
+
+function invest(i){
+
+    let gain = [100,200,300,400,500,600][i];
+    let percentGain = Math.floor(Math.random()*10)+5;
+
+    money += gain;
+    data[i] = Math.min(100, data[i] + percentGain);
+
+    document.getElementById("money").innerText = "Bakiye: " + money + "$";
+
+    document.getElementById("b"+i).style.width = data[i] + "%";
+    document.getElementById("g"+i).innerText = data[i] + "%";
+}
+
+</script>
+
+</body>
+</html>

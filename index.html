@@ -4,401 +4,60 @@
 <meta charset="UTF-8">
 <title>Cheha Sosyalist Devleti</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
 <style>
 body{
     margin:0;
-    font-family:'Orbitron', sans-serif;
-    background:linear-gradient(-45deg,#000,#1a0000,#000,#220000);
-    background-size:400% 400%;
-    animation:bg 10s ease infinite;
+    font-family:Arial;
+    background:black;
     color:white;
-    overflow:hidden;
-}
-
-@keyframes bg{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-
-.page{
-    display:none;
-    width:100%;
-    height:100vh;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    text-align:center;
-}
-
-.container{
-    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    height:100vh;
     flex-direction:column;
 }
 
-h1{
-    color:#ff0033;
-    text-shadow:0 0 20px red;
-}
-
-.btn{
+button{
     padding:12px 20px;
-    margin:10px;
     border:none;
     border-radius:10px;
     cursor:pointer;
-    background:linear-gradient(90deg,#ff0033,#660000);
-    color:white;
-}
-
-.backBtn{
-    background:yellow !important;
-    color:black !important;
-    font-weight:bold;
-}
-
-.popup{
-    position:fixed;
-    top:50%;
-    left:50%;
-    transform:translate(-50%,-50%);
-    background:rgba(0,0,0,0.95);
-    padding:25px;
-    border-radius:15px;
-    display:none;
-    z-index:9999;
-}
-
-input{
-    width:200px;
-    padding:8px;
-    margin:5px;
-    border-radius:8px;
-    border:none;
-}
-
-#errorBox{
-    position:fixed;
-    top:20px;
-    left:50%;
-    transform:translateX(-50%);
     background:red;
     color:white;
-    padding:10px 20px;
-    border-radius:10px;
-    display:none;
-    font-weight:bold;
 }
-
-#menuPage{
-    background:white;
-    color:black;
-}
-
-/* BAR */
-.bar{
-    height:10px;
-    background:#333;
-    border-radius:10px;
-    width:100%;
-    overflow:hidden;
-}
-.bar div{
-    height:10px;
-    width:0%;
-    transition:0.4s;
+input{
+    margin:5px;
+    padding:8px;
 }
 </style>
 </head>
 
 <body>
 
-<div id="errorBox"></div>
+<h1>CHEHA DEVLETİ</h1>
 
-<!-- LOGIN -->
-<div id="page1" class="container">
-    <h1>☭ CHEHA SOSYALİST DEVLETİ</h1>
-    <button class="btn" onclick="openLogin()">GİRİŞ</button>
-</div>
+<input id="isim" placeholder="İsim">
+<input id="id" placeholder="ID">
 
-<div class="popup" id="popup">
-    <h3>Giriş</h3>
-    <input id="isim" placeholder="İsim">
-    <input id="id" placeholder="ID">
-    <button class="btn" onclick="login()">Giriş</button>
-</div>
-
-<!-- PAGE 2 -->
-<div id="page2" class="page">
-    <div id="welcome" style="font-size:26px;color:#ff0033;"></div>
-    <button class="btn" onclick="show('menuPage')">MENÜ</button>
-</div>
-
-<!-- MENU -->
-<div id="menuPage" class="page">
-    <button class="btn" onclick="show('peoplePage')">Kişiler</button>
-    <button class="btn" onclick="show('statePage')">Devlet</button>
-    <button class="btn" onclick="show('economyPage')">Ekonomi</button>
-    <button class="btn" onclick="show('powerPage')">Ülke Gücü</button>
-    <button class="btn" onclick="show('aiPage')">Cheha.AI</button>
-
-    <button class="btn" style="background:linear-gradient(90deg,#0044ff,#000033);box-shadow:0 0 18px #0044ff;"
-    onclick="openProtocol()">
-    🔵 Protokol 13
-    </button>
-
-    <button class="btn backBtn" onclick="show('page2')">Geri</button>
-</div>
-
-<!-- PEOPLE -->
-<div id="peoplePage" class="page">
-    <h2>Önemli İsimler</h2>
-    <p>Hüseyin Çelebi</p>
-    <p>Erke Doruk</p>
-    <p>Toygar</p>
-    <p>Eril</p>
-    <p>Ali</p>
-    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
-</div>
-
-<!-- STATE -->
-<div id="statePage" class="page">
-    <h2>Devlet Girişi</h2>
-    <input id="statePass" placeholder="Şifre">
-    <button class="btn" onclick="checkState()">Giriş</button>
-    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
-</div>
-
-<!-- ECONOMY -->
-<div id="economyPage" class="page">
-
-    <h2>💰 EKONOMİ</h2>
-
-    <div id="money" style="margin-bottom:15px;font-size:20px;">
-        Bakiye: 0£
-    </div>
-
-    <table style="width:90%;max-width:650px;text-align:center;">
-        <tr>
-            <th>Yatırım</th>
-            <th>Seviye</th>
-            <th>Bar</th>
-            <th>İşlem</th>
-        </tr>
-
-        <tr>
-            <td>Gümüş</td>
-            <td id="gumusLevel">0</td>
-            <td><div class="bar"><div id="gumusBar" style="background:lime;"></div></div></td>
-            <td><button class="btn" onclick="invest('gumus')">Yatır</button></td>
-        </tr>
-
-        <tr>
-            <td>Altın</td>
-            <td id="altinLevel">0</td>
-            <td><div class="bar"><div id="altinBar" style="background:gold;"></div></div></td>
-            <td><button class="btn" onclick="invest('altin')">Yatır</button></td>
-        </tr>
-
-        <tr>
-            <td>Pamuk</td>
-            <td id="pamukLevel">0</td>
-            <td><div class="bar"><div id="pamukBar" style="background:orange;"></div></div></td>
-            <td><button class="btn" onclick="invest('pamuk')">Yatır</button></td>
-        </tr>
-
-        <tr>
-            <td>Bronz</td>
-            <td id="bronzLevel">0</td>
-            <td><div class="bar"><div id="bronzBar" style="background:#cd7f32;"></div></div></td>
-            <td><button class="btn" onclick="invest('bronz')">Yatır</button></td>
-        </tr>
-
-        <tr>
-            <td>Beton</td>
-            <td id="betonLevel">0</td>
-            <td><div class="bar"><div id="betonBar" style="background:gray;"></div></div></td>
-            <td><button class="btn" onclick="invest('beton')">Yatır</button></td>
-        </tr>
-
-        <tr>
-            <td>Sanayi</td>
-            <td id="sanayiLevel">0</td>
-            <td><div class="bar"><div id="sanayiBar" style="background:blue;"></div></div></td>
-            <td><button class="btn" onclick="invest('sanayi')">Yatır</button></td>
-        </tr>
-    </table>
-
-    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
-</div>
-
-<!-- POWER -->
-<div id="powerPage" class="page">
-    <h2>🏛 ÜLKE GÜCÜ</h2>
-    <div>Manpower: <b>13,4M</b></div>
-    <div>Sıralama: <b>162. Medeniyet</b></div>
-    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
-</div>
-
-<!-- AI -->
-<div id="aiPage" class="page">
-    <h2>🤖 Cheha.AI</h2>
-
-    <input id="aiInput" placeholder="Sorunu yaz...">
-    <button class="btn" onclick="aiAnswer()">Gönder</button>
-
-    <div id="aiResult" style="margin-top:20px;"></div>
-
-    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
-</div>
-
-<!-- PROTOCOL -->
-<div id="protocolPage" class="page">
-
-    <h2 style="color:#00aaff;">🔵 PROTOKOL 13</h2>
-
-    <input id="protocolPass" placeholder="Şifre">
-    <button class="btn" onclick="checkProtocol()">Giriş</button>
-
-    <div id="protocolContent" style="display:none;margin-top:20px;">
-        ✔ ERİŞİM SAĞLANDI<br>
-        📡 Gizli sistem aktif
-    </div>
-
-    <button class="btn backBtn" onclick="show('menuPage')">Geri</button>
-</div>
+<button onclick="login()">Giriş</button>
 
 <script>
-
-/* LOGIN */
-function openLogin(){
-    document.getElementById("popup").style.display="block";
-}
-
 function login(){
-    let isim=document.getElementById("isim").value.trim();
-    let id=document.getElementById("id").value.trim();
+let i=document.getElementById("isim").value;
+let id=document.getElementById("id").value;
 
-    let user=null, soyad="", butce="", welcome="Merhaba ";
-
-    if(isim==="Ali" && id==="07312012"){
-        user="Ali"; soyad="Sakarya"; butce="620£";
-    }
-    else if(isim==="Eril" && id==="6512012"){
-        user="Eril"; soyad="Şehitcan"; butce="210£";
-    }
-    else if(isim==="Hüseyin" && id==="08732012"){
-        user="Hüseyin"; soyad="Çelebi"; butce="2000£";
-        welcome="Merhaba Başkanım ";
-    }
-    else if(isim==="Erke" && id==="09772012"){
-        user="Erke"; soyad="Doruk"; butce="0£";
-    }
-
-    if(user){
-        document.getElementById("popup").style.display="none";
-        document.getElementById("page1").style.display="none";
-        show("page2");
-
-        document.getElementById("welcome").innerHTML =
-        welcome + user +
-        "<br>Soyad: " + soyad +
-        "<br>Bütçe: " + butce;
-    }
-    else{
-        showError("❌ Tekrar Deneyin");
-    }
+if(
+(i==="Ali"&&id==="07312012")||
+(i==="Eril"&&id==="6512012")||
+(i==="Hüseyin"&&id==="08732012")||
+(i==="Erke"&&id==="09772012")||
+(i==="Toygar"&&id==="402012")
+){
+window.location.href="menu.html";
+}else{
+alert("Hatalı giriş");
 }
-
-/* NAV */
-function show(id){
-    document.querySelectorAll(".page").forEach(p=>p.style.display="none");
-    document.getElementById(id).style.display="flex";
 }
-
-/* STATE */
-function checkState(){
-    let p=document.getElementById("statePass").value;
-    if(p==="474747474") alert("✔ OK");
-    else showError("❌ Hatalı");
-}
-
-/* ERROR */
-function showError(msg){
-    let box=document.getElementById("errorBox");
-    box.innerText=msg;
-    box.style.display="block";
-    setTimeout(()=>box.style.display="none",3000);
-}
-
-/* AI */
-function aiAnswer(){
-    let q=document.getElementById("aiInput").value;
-    if(!q){
-        showError("❌ Soru yaz");
-        return;
-    }
-    document.getElementById("aiResult").innerText =
-    "🤖 Düşünülüyor... 5 saat sonra";
-}
-
-/* ECONOMY */
-let balance = 0;
-
-let data = {
-    gumus:0,
-    altin:0,
-    pamuk:0,
-    bronz:0,
-    beton:0,
-    sanayi:0
-};
-
-function invest(type){
-
-    let roll = Math.random();
-    let positive = roll < 0.58;
-
-    let values = [100,250,400];
-    let amount = values[Math.floor(Math.random()*values.length)];
-
-    if(!positive) amount = -amount;
-
-    balance += amount;
-
-    data[type] = Math.min(data[type] + 1, 100);
-
-    document.getElementById("money").innerText =
-        "Bakiye: " + balance + "£";
-
-    document.getElementById(type+"Bar").style.width =
-        data[type] + "%";
-
-    document.getElementById(type+"Level").innerText =
-        data[type];
-}
-
-/* PROTOCOL 13 */
-function openProtocol(){
-    show('protocolPage');
-}
-
-function checkProtocol(){
-    let pass=document.getElementById("protocolPass").value;
-
-    if(pass==="12929287728"){
-        document.getElementById("protocolContent").style.display="block";
-    }
-    else{
-        showError("❌ Yetkisiz erişim");
-    }
-}
-
 </script>
 
 </body>

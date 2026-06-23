@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body style="font-family:Arial;text-align:center;">
+
+<h2>PROTOKOL 13</h2>
+
+<input id="pass" placeholder="Şifre">
+<button onclick="check()">Giriş</button>
+
+<p id="ok" style="display:none;">✔ ERİŞİM SAĞLANDI</p>
+
+<br>
+<button onclick="location.href='menu.html'">Geri</button>
+
+<script>
+function check(){
+if(document.getElementById("pass").value==="373737737"){
+document.getElementById("ok").style.display="block";
+}else{
+alert("Yetkisiz");
+}
+}
+</script>
+
+</body>
+</html>
