@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
-<body style="font-family:Arial;text-align:center;">
+<head>
+<title>Protokol</title>
+</head>
 
-<h2>PROTOKOL 13</h2>
+<body style="background:radial-gradient(circle,#1a0000,#000);color:white;text-align:center;font-family:Arial;">
 
-<input id="pass" placeholder="Şifre">
-<button onclick="check()">Giriş</button>
+<h1 style="color:red;text-shadow:0 0 20px red;">🔵 PROTOKOL 13</h1>
+
+<input id="p">
+<button onclick="check()" style="padding:10px;background:red;color:white;border:none;">GİRİŞ</button>
 
 <p id="ok" style="display:none;">✔ ERİŞİM SAĞLANDI</p>
 
 <br>
-<button onclick="location.href='menu.html'">Geri</button>
+<button onclick="location.href='menu.html'"
+style="padding:10px 20px;background:red;color:white;border:none;border-radius:10px;">
+GERİ
+</button>
 
 <script>
 function check(){
-if(document.getElementById("pass").value==="373737737"){
-document.getElementById("ok").style.display="block";
-}else{
-alert("Yetkisiz");
-}
+if(p.value==="373737737"){
+ok.style.display="block";
+}else alert("Yetkisiz");
 }
 </script>
 
